@@ -148,7 +148,8 @@ def pregunta_09():
     39   39   E    5  1998-01-26  1998
 
     """
-    return
+    tbl0['year'] = tbl0['_c3'].str.split('-').str[0]
+    return tbl0
 
 
 def pregunta_10():
@@ -165,7 +166,15 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    return
+    newtbl0 = {}
+    res = []
+    letras = tbl0['_c1'].unique()
+    for letra in letras:
+      valores = tbl0[tbl0['_c1'] == letra]['_c2'].values.tolist()
+      res.append(":".join([str(item) for item in sorted(valores)]))
+    newtbl0 = {'_c0':letras, '_c1':res}
+    tbl0n = pd.DataFrame.from_dict(newtbl0).sort_values('_c0').set_index('_c0')
+    return tbl0n
 
 
 def pregunta_11():
