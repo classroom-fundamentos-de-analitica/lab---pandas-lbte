@@ -193,7 +193,15 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    return
+    newtbl1 = {}
+    res = []
+    numeros = tbl1['_c0'].unique()
+    for num in numeros:
+        valores = tbl1[tbl1['_c0'] == num]['_c4'].values.tolist()
+        res.append(",".join([str(item) for item in sorted(valores)]))
+    newtbl1 = {'_c0':numeros, '_c4':res}
+    tbl1n = pd.DataFrame.from_dict(newtbl1).sort_values('_c0')
+    return tbl1n
 
 
 def pregunta_12():
@@ -211,7 +219,23 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    return
+    newtbl2 = {}
+    res = []
+    tbl2copy = tbl2.sort_values('_c5a')
+    numeros = tbl2copy['_c0'].unique()
+    for num in numeros:
+        aux = ""
+        letras = tbl2copy[tbl2copy['_c0'] == num]['_c5a'].values.tolist()
+        letrasNum = tbl2copy[tbl2copy['_c0'] == num]['_c5b'].values.tolist()
+        for i in range(len(letras)):
+            aux += letras[i] + ":" + str(letrasNum[i])
+            if i < len(letras)-1:
+                aux += ","
+        res.append(aux)
+    newtbl2 = {'_c0':numeros, '_c4':res}
+    tbl2n = pd.DataFrame.from_dict(newtbl2).sort_values('_c0').reset_index()
+    del tbl2n['index']
+    return tbl2n
 
 
 def pregunta_13():
