@@ -234,7 +234,7 @@ def pregunta_12():
             if i < len(letras)-1:
                 aux += ","
         res.append(aux)
-    newtbl2 = {'_c0':numeros, '_c4':res}
+    newtbl2 = {'_c0':numeros, '_c5':res}
     tbl2n = pd.DataFrame.from_dict(newtbl2).sort_values('_c0').reset_index()
     del tbl2n['index']
     return tbl2n
