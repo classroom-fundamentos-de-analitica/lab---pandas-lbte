@@ -170,10 +170,12 @@ def pregunta_10():
     res = []
     letras = tbl0['_c1'].unique()
     for letra in letras:
-      valores = tbl0[tbl0['_c1'] == letra]['_c2'].values.tolist()
-      res.append(":".join([str(item) for item in sorted(valores)]))
+        valores = tbl0[tbl0['_c1'] == letra]['_c2'].values.tolist()
+        res.append(":".join([str(item) for item in sorted(valores)]))
     newtbl0 = {'_c0':letras, '_c1':res}
-    tbl0n = pd.DataFrame.from_dict(newtbl0).sort_values('_c0').set_index('_c0')
+    tbl0n = pd.DataFrame.from_dict(newtbl0)
+    tbl0n.rename(columns={'_c0':'_c1', '_c1':'_c2'}, inplace=True)
+    tbl0n = tbl0n.sort_values('_c1').set_index('_c1')
     return tbl0n
 
 
